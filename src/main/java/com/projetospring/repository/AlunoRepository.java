@@ -7,6 +7,10 @@ import com.projetospring.entities.Aluno;
 
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	
-	@Query //pesquisar sobre o count e fazer o comando sql
-	public void findAlunoByMatricula();
+	/**
+	 * Retorna o número de registros que a tabela aluno
+	 * tem com a matricula igual a especificada.
+	 */
+	@Query("select count(matricula) from com.projetospring.entities.Aluno a where a.matricula = ?1;")
+	public int findAlunoByMatricula(String matricula);
 }
