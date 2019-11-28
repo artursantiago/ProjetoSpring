@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.projetospring.entities.Aluno;
+import com.projetospring.exceptions.NegocioException;
 import com.projetospring.repository.AlunoRepository;
 
 public class AlunoService {
@@ -23,11 +24,11 @@ public class AlunoService {
 	/**
 	 * Método que retorna o Aluno com o Id especificado
 	 */
-	public Aluno findById(Long id) { 
+	public Aluno findById(Long id) throws NegocioException { 
 		Optional<Aluno> alunoOptional = repository.findById(id);
 		
 		if(! alunoOptional.isPresent()) {
-			 //throw new AlunoNotFoundException("Aluno com id = " + id + " não econtrado.");
+			 throw new NegocioException("Aluno com id = " + id + " não econtrado no banco de dados.");
 		}
 		
 		return alunoOptional.get();
@@ -37,7 +38,7 @@ public class AlunoService {
 	 * Retorna o numero de alunos no banco com a
 	 * matricula especificada
 	 */
-	public Long findAlunoByMatricula(String matricula) {
+	public int findAlunoByMatricula(String matricula) {
 		return repository.findAlunoByMatricula(matricula);
 	}
 	
@@ -45,24 +46,36 @@ public class AlunoService {
 	/**
 	 * Método que persiste o aluno especificado e o retorna-o.
 	 */
-	public Aluno save(Aluno aluno) {
+	public Aluno save(Aluno aluno) throws NegocioException{
+		aluno.validar();
+		validaAlunoNoBanco(aluno);
 		return repository.save(aluno);
 	}
 	
 	/**
 	 * Método que deleta um aluno passando-o como parâmetro.
 	 */
-	public void delete(Aluno aluno) { 
+	public void delete(Aluno aluno) {
+		aluno.validar();
 		repository.delete(aluno);
 	}
 	
 	/**
 	 * Método que deleta um aluno pelo seu id.
 	 */
-	public void deleteById(Long id) { 
+	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
 	
+	/**
+	 * Método privado que verifica se já existe um aluno
+	 * com a mesma matrícula no banco de dados.
+	 */
+	private void validaAlunoNoBanco(Aluno aluno) throws NegocioException { 
+		if(findAlunoByMatricula(aluno.getMatricula()) == 1 && aluno.getId() != 0) {
+			throw new  NegocioException("Já existe um aluno com essa matrícula.");
+		}
+	}
 	
 	/////////////Getters and Setters///////////////////
 	public AlunoRepository getRepository() {
