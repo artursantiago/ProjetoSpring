@@ -1,6 +1,5 @@
 package com.projetospring.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class AlunoController {
 	@Autowired
 	private AlunoService service;
 	
-	private List<Aluno> listaAlunos = new ArrayList<Aluno>();
+	//private List<Aluno> listaAlunos = new ArrayList<Aluno>();
 	
 	/**
 	 * 
@@ -27,7 +26,6 @@ public class AlunoController {
 	}
 	
 	/*
-	
 	@GetMapping()
 	public Aluno findAlunoByMatricula() { 
 		return service.getAlunoByMatricula();
@@ -42,16 +40,15 @@ public class AlunoController {
 	/*
 	  
 	@PutMapping()
-	
 		função para salvar um aluno que está sendo atualizado
 		
 	*/
 	
 	/*
 	 @DeleteMapping()
-	 
 	 	função para deletar um aluno quando clicado no botão de deletar
 	 */
+	
 	
 	/*
 	 Função para chamar a pagina de cadastro
