@@ -30,7 +30,6 @@ public class AlunoService {
 		if(! alunoOptional.isPresent()) {
 			 throw new NegocioException("Aluno com id = " + id + " não econtrado no banco de dados.");
 		}
-		
 		return alunoOptional.get();
 	}
 	
