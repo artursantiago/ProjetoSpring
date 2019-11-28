@@ -85,6 +85,6 @@ public class AlunoService {
 	public void setRepository(AlunoRepository repository) {
 		this.repository = repository;
 	}
-	
+	 
 	
 }

@@ -93,7 +93,7 @@ public class Aluno{
 		/**
 		 * Valida os dados da classe Pessoa desse aluno.
 		 */
-		this.getPessoa().validar();
+		this.getPessoa().validar(); 
 	}
 	
 	

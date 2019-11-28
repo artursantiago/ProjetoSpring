@@ -12,5 +12,5 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	 * com a matricula igual a matricula especificada.
 	 */
 	@Query("select count(matricula) from com.projetospring.entities.Aluno a where a.matricula = ?1;")
-	public int findAlunoByMatricula(String matricula);
+	public int findAlunoByMatricula(String matricula); 
 }

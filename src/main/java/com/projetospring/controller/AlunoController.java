@@ -55,7 +55,7 @@ public class AlunoController {
 	 */
 	
 	/*
-	 função para chamar a página de listagem
+	 função para chamar a página de listagem 
 	 */
 }
 
